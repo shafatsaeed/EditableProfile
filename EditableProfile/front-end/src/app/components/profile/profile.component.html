@@ -1,0 +1,125 @@
+
+<nav  class="navbar navbar-inverse">
+  <div class="container-fluid">
+
+    <ul class="nav navbar-nav">
+      <li class="active"  ><a>Home</a></li>
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+
+      <li><a href="#"><span class="glyphicon glyphicon-log-in" (click)="logOut()"></span> LogOut</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- Jumbotron Header -->
+  <header class="jumbotron my-4">
+    <h1 class="display-3">  <strong>{{currentUser.realName}}</strong> </h1>
+    
+    <div class="row">
+
+    </div>
+  </header>
+  <form  name="form" (ngSubmit)="f.form.valid && update()"  #f="ngForm">
+	<div class="form-group">
+		<label for="username">Display Name</label>
+         <input type="text" class="form-control" id="username" [(ngModel)]="currentUser.username" name="username" readonly>
+    </div>
+	<div class="form-group">
+		<label for="realName">Real Name</label>
+         <input type="text" class="form-control" id="realName" [(ngModel)]="currentUser.realName" name="realName" >
+    </div>
+	<div class="form-group">
+		<label for="birthDay">Birth Day: {{currentUser.birthDay | date : 'MM/dd/yyyy'}} </label>
+         <input type="date" class="form-control" id="birthDay" value="{{currentUser.birthDay | date : 'MM/dd/yyyy'}}"  name="birthDay" >
+    </div>
+	
+	<div class="form-group" >
+        <label for="gender">Gender</label>
+		<select class="form-control" [(ngModel)]="currentUser.gender" name="gender" id="gender" #gender="ngModel" required>
+			<option *ngFor="let gender of genderList" [value]='gender.name'>
+				{{gender.name}}
+			</option>
+		</select>
+		
+    </div>	
+	
+	  <div class="form-group" >
+		<label for="gender">Ethnicity</label>
+		<select class="form-control" [(ngModel)]="currentUser.ethnicity" name="ethnicity" id="ethnicity" #ethnicity="ngModel" >
+			<option *ngFor="let ethnicity of ethnicityList" [value]='ethnicity.name'>
+				{{ethnicity.name}}
+			</option>
+		</select>        
+	  </div>
+	  <div class="form-group" >
+		<label for="religion">Religion</label>
+		<select class="form-control" [(ngModel)]="currentUser.religion" name="religion" id="religion" #religion="ngModel" >
+			<option *ngFor="let religon of religionList" [value]='religon.name'>
+				{{religon.name}}
+			</option>
+		</select>        
+	  </div>
+	   <div class="form-group" >
+		<label for="fullName">Height</label>
+		<input type="text" class="form-control" name="height" id="height" [(ngModel)]="currentUser.height" #height="ngModel"  />
+		
+	  </div>
+	  <div class="form-group" >
+		<label for="gender">Figure</label>
+		<select class="form-control" [(ngModel)]="currentUser.figure" name="figure" id="figure" #figure="ngModel" >
+			<option *ngFor="let figure of figureList" [value]='figure.name'>
+				{{figure.name}}
+			</option>
+		</select>
+	    </div>		
+		<div class="form-group" >
+        <label for="maritalStatus">Marital Status</label>
+		<select class="form-control" [(ngModel)]="currentUser.maritalStatus" name="maritalStatus" id="maritalStatus" #maritalStatus="ngModel" readonly>
+			<option *ngFor="let m of maritalList" [value]='m.name'>
+				{{m.name}}
+			</option>
+		</select>
+        
+      </div>
+		 <div class="form-group" >
+        <label for="occupation">Occupation</label>
+        <input type="text" class="form-control" name="occupation" id="occupation" [(ngModel)]="currentUser.occupation" #occupation="ngModel" readonly />
+        
+      </div>
+	 
+		  
+	  <div class="form-group" >
+		<label for="aboutMe">aboutMe</label>
+		<textarea class="form-control" name="aboutMe" id="aboutMe" [(ngModel)]="currentUser.aboutMe" #aboutMe="ngModel" >
+			Enter your text here...
+		</textarea>
+		
+	  </div>
+	   <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" name="password" id="password"[(ngModel)]="currentUser.password" #password="ngModel" required minlength="4" />
+        <div *ngIf="f.submitted && !password.valid" class="help-block">
+
+          <div *ngIf="password.errors.required">
+            password is required.
+          </div>
+          <div *ngIf="password.errors.minlength">
+            password must be at least 4 characters long.
+          </div>
+
+        </div>
+      </div>
+	 
+	
+	<button type="submit" class="btn btn-default">Submit</button>
+  </form>
+</div>
+
+
+
+
+

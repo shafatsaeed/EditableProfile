@@ -1,0 +1,117 @@
+
+
+<div class="container">
+  <div class="card card-container">
+    <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+    <p id="profile-name" class="profile-name-card"></p>
+
+    <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
+     
+      <div class="form-group" >
+        <label for="realName">Real Name</label>
+        <input type="text" class="form-control" name="realName" id="realName" [(ngModel)]="user.realName" #realName="ngModel" required />  
+		<div *ngIf="f.submitted && !realName.valid" class="help-block">The Real Name is required</div>
+      </div>
+	  <div class="form-group" >
+        <label for="birthDay">Birth Day</label>		
+        <input type="date" class="form-control" name="birthDay" id="birthDay" [(ngModel)]="user.birthDay" [value]='user.birthDay | date: "yyyy-MM-dd"' #birthDay="ngModel" required />
+        <div *ngIf="f.submitted && !birthDay.valid" class="help-block">The Birth Day is required</div>
+      </div>
+	  <div class="form-group" >
+        <label for="gender">Gender</label>
+		<select class="form-control" [(ngModel)]="user.gender" name="gender" id="gender" #gender="ngModel" required>
+			<option *ngFor="let g of genderList" [value]='g.name'>
+				{{g.name}}
+			</option>
+		</select>
+        <div *ngIf="f.submitted && !gender.valid" class="help-block">The Gender is required</div>
+      </div>
+	  <div class="form-group" >
+        <label for="ethnicity">Ethnicity</label>
+		<select class="form-control" [(ngModel)]="user.ethnicity" name="ethnicity" id="ethnicity" #ethnicity="ngModel" required>
+			<option *ngFor="let ethnicity of ethnicityList" [value]='ethnicity.name'>
+				{{ethnicity.name}}
+			</option>
+		</select>        
+      </div>
+	  <div class="form-group" >
+        <label for="religion">Religion</label>
+		<select class="form-control" [(ngModel)]="user.religion" name="religion" id="religion" #religion="ngModel" required>
+			<option *ngFor="let religion of religionList" [value]='religion.name'>
+				{{religion.name}}
+			</option>
+		</select>        
+      </div>
+	   <div class="form-group" >
+        <label for="height">Height</label>
+        <input type="text" class="form-control" name="height" id="height" [(ngModel)]="user.height" #height="ngModel" required />
+        
+      </div>
+	  <div class="form-group" >
+        <label for="figure">Figure</label>
+		<select class="form-control" [(ngModel)]="user.figure" name="figure" id="figure" #figure="ngModel" required>
+			<option *ngFor="let figure of figureList" [value]='figure.name'>
+				{{figure.name}}
+			</option>
+		</select>
+        
+      </div>
+	  <div class="form-group" >
+        <label for="maritalStatus">Marital Status</label>
+		<select class="form-control" [(ngModel)]="user.maritalStatus" name="maritalStatus" id="maritalStatus" #maritalStatus="ngModel" required>
+			<option *ngFor="let m of maritalList" [value]='m.name'>
+				{{m.name}}
+			</option>
+		</select>
+        
+      </div>
+	 
+	   <div class="form-group" >
+        <label for="occupation">Occupation</label>
+        <input type="text" class="form-control" name="occupation" id="occupation" [(ngModel)]="user.occupation" #occupation="ngModel"  />
+        
+      </div>
+	  <div class="form-group" >
+        <label for="aboutMe">about Me</label>
+        <textarea class="form-control" name="aboutMe" id="aboutMe" [(ngModel)]="user.aboutMe" #aboutMe="ngModel" >
+			Enter your text here...
+		</textarea>
+        
+      </div>
+	  <div class="form-group">
+		<label for="profilePicture">Profile Picture</label>
+		<input type="file" />
+	  </div>
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+        <label for="username">Display Name</label>
+        <input type="text" class="form-control" name="username" id="username" [(ngModel)]="user.username" #username="ngModel" required />
+        
+      </div>
+	  
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" name="password" id="password"[(ngModel)]="user.password" #password="ngModel" required minlength="4" />
+        <div *ngIf="f.submitted && !password.valid" class="help-block">
+
+          <div *ngIf="password.errors.required">
+            password is required.
+          </div>
+          <div *ngIf="password.errors.minlength">
+            password must be at least 4 characters long.
+          </div>
+
+        </div>
+      </div>
+	  
+      <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Create Account</button>
+      <button [routerLink]="['/login']" class="btn btn-lg btn-danger btn-block btn-cancel" type="button">Cancel</button>
+
+    </form><!-- /form -->
+
+  </div><!-- /card-container -->
+</div><!-- /container -->
+
+
+
+
+
