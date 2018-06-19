@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.social.beans.City;
 import com.social.beans.Ethnicity;
 import com.social.beans.Figure;
 import com.social.beans.Gender;
@@ -49,7 +50,7 @@ public class AccountController {
     // request method to create a new account by a guest
     @CrossOrigin
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseEntity<?> createUser(@RequestBody User newUser) {
+    public ResponseEntity<?> createUser(@RequestBody User newUser) throws Exception {
         if (userService.find(newUser.getUsername()) != null) {
             logger.error("username Already exist " + newUser.getUsername());
             return new ResponseEntity(
@@ -57,7 +58,7 @@ public class AccountController {
                     HttpStatus.CONFLICT);
         }
         newUser.setRole("USER");
-
+        //newUser.setProfilePic(file.getBytes());
         return new ResponseEntity<User>(userService.save(newUser), HttpStatus.CREATED);
     }
 
@@ -88,12 +89,14 @@ public class AccountController {
     @RequestMapping(value = "/choiceList", method = RequestMethod.GET)
     public ResponseEntity<?> getSingleChoiceAttributes() {
         Resource res = resourceLoader.getResource("classpath:/json/single_choice_attributes.json");
+        Resource res2 = resourceLoader.getResource("classpath:/json/cities.json");
         SingleChoiceAttributes sca = new SingleChoiceAttributes();
         List<Gender> genderList = new ArrayList<Gender>();
         List<MaritalStatus> maritalStatusList = new ArrayList<MaritalStatus>();
         List<Religion> religionList = new ArrayList<Religion>();
         List<Ethnicity> ethnicityList = new ArrayList<Ethnicity>();
         List<Figure> figureList = new ArrayList<Figure>();
+        List<City> cityList = new ArrayList<City>();
         Gson gson = new Gson();
         try {
             JsonObject jsonObject = gson.fromJson(new FileReader(res.getFile()), JsonObject.class);
@@ -151,6 +154,19 @@ public class AccountController {
                 figureList.add(figure);
             }
             sca.setFigureList(figureList);
+
+            //Cities
+            JsonObject jsonObject2 = gson.fromJson(new FileReader(res2.getFile()), JsonObject.class);
+            JsonArray citiesArray = jsonObject2.getAsJsonArray("cities");
+            for (JsonElement citiesElement : citiesArray) {
+                JsonObject jo = citiesElement.getAsJsonObject();
+                City city = new City();
+                city.setLat(jo.get("lat").getAsString());
+                city.setLon(jo.get("lon").getAsString());
+                city.setCity(jo.get("city").getAsString());
+                cityList.add(city);
+            }
+            sca.setCityList(cityList);
 
         } catch (Exception ee) {
             System.out.println(ee);

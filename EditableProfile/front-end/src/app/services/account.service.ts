@@ -27,12 +27,14 @@ export class AccountService {
 	  let religionList = response.json().religionList;
 	  let ethnicityList = response.json().ethnicityList;
 	  let figureList = response.json().figureList;
+	  let cityList = response.json().cityList;
       if (genderList) {        
         localStorage.setItem('genderList', JSON.stringify(genderList));
 		localStorage.setItem('maritalList', JSON.stringify(maritalList));
 		localStorage.setItem('religionList', JSON.stringify(religionList));
 		localStorage.setItem('ethnicityList', JSON.stringify(ethnicityList));
 		localStorage.setItem('figureList', JSON.stringify(figureList));
+		localStorage.setItem('cityList', JSON.stringify(cityList));
       }
     }
   } 

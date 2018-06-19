@@ -5,7 +5,7 @@
     <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
     <p id="profile-name" class="profile-name-card"></p>
 
-    <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
+    <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" enctype="multipart/form-data">
      
       <div class="form-group" >
         <label for="realName">Real Name</label>
@@ -65,6 +65,15 @@
 		</select>
         
       </div>
+	  <div class="form-group" >
+        <label for="city">Location</label>
+		<select class="form-control" [(ngModel)]="user.city" name="city" id="city" #city="ngModel" required>
+			<option *ngFor="let c of cityList" [value]='c.city'>
+				{{c.city}}
+			</option>
+		</select>
+        
+      </div>
 	 
 	   <div class="form-group" >
         <label for="occupation">Occupation</label>
@@ -78,10 +87,7 @@
 		</textarea>
         
       </div>
-	  <div class="form-group">
-		<label for="profilePicture">Profile Picture</label>
-		<input type="file" />
-	  </div>
+	 
       <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
         <label for="username">Display Name</label>
         <input type="text" class="form-control" name="username" id="username" [(ngModel)]="user.username" #username="ngModel" required />

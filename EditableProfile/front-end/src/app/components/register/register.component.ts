@@ -17,6 +17,8 @@ export class RegisterComponent implements OnInit {
   religionList:[{id: string, name: string}];
   ethnicityList:[{id: string, name: string}];
   figureList:[{id: string, name: string}];
+  cityList:[{lat: string, lon: string, city: string}];
+  
 
   constructor(public accountService: AccountService, public router: Router) {
 	  this.getChoiceList();
@@ -25,6 +27,7 @@ export class RegisterComponent implements OnInit {
 	  this.religionList =  JSON.parse(localStorage.getItem('religionList'));
 	  this.ethnicityList =  JSON.parse(localStorage.getItem('ethnicityList'));
 	  this.figureList = JSON.parse(localStorage.getItem('figureList'));
+	  this.cityList = JSON.parse(localStorage.getItem('cityList'));
   }
 
   ngOnInit() {
@@ -48,5 +51,10 @@ export class RegisterComponent implements OnInit {
         error => {
 
         });
+  }
+  onFileChange(event){
+    this.file = event.target.files;
+	this.user.file = this.file;
+    console.log(event);
   }
 }

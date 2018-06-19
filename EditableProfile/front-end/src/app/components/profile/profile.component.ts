@@ -18,6 +18,7 @@ export class ProfileComponent implements OnInit {
   religionList:[{id: string, name: string}];
   ethnicityList:[{id: string, name: string}];
   figureList:[{id: string, name: string}];
+  cityList:[{lat: string, lon: string, city: string}];
   constructor(public authService: AuthService, public router: Router,public http: Http,public accountService: AccountService) {	
 	this.getChoiceList();
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));	
@@ -26,6 +27,7 @@ export class ProfileComponent implements OnInit {
 	this.religionList =  JSON.parse(localStorage.getItem('religionList'));
 	this.ethnicityList =  JSON.parse(localStorage.getItem('ethnicityList'));
 	this.figureList = JSON.parse(localStorage.getItem('figureList'));
+	this.cityList = JSON.parse(localStorage.getItem('cityList'));
   }
 
   ngOnInit() {		

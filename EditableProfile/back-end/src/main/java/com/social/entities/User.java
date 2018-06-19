@@ -63,7 +63,10 @@ public class User implements UserDetails {
     private String maritalStatus;
     private String occupation;
     private String aboutMe;
-    private String location;
+    private String city;
+    @Lob
+    @Column(name = "file", length = 100000)
+    private byte[] file;
 
     public User() {
 
@@ -223,12 +226,20 @@ public class User implements UserDetails {
         this.aboutMe = aboutMe;
     }
 
-    public String getLocation() {
-        return location;
+    public String getCity() {
+        return city;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public byte[] getFile() {
+        return file;
+    }
+
+    public void setFile(byte[] file) {
+        this.file = file;
     }
 
 }

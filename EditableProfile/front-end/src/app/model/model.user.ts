@@ -12,5 +12,6 @@ export class User {
   maritalStatus: string = "";
   occupation: string = "";
   aboutMe: string = "";
-  location: string = "";
+  city: string = "";
+ 
 }

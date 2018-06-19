@@ -13,6 +13,7 @@ public class SingleChoiceAttributes {
     private List<Figure> figureList;
     private List<MaritalStatus> maritalStatusList;
     private List<Religion> religionList;
+    private List<City> cityList;
 
     public List<Gender> getGenderList() {
         return genderList;
@@ -52,6 +53,14 @@ public class SingleChoiceAttributes {
 
     public void setReligionList(List<Religion> religionList) {
         this.religionList = religionList;
+    }
+
+    public List<City> getCityList() {
+        return cityList;
+    }
+
+    public void setCityList(List<City> cityList) {
+        this.cityList = cityList;
     }
 
 }
